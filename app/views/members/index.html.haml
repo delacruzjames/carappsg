@@ -1,0 +1,13 @@
+.container
+  %h1 Members#index
+  %p Find me in app/views/members/index.html.haml
+  %table.table
+    %thead.thead-dark
+      %tr
+        %th{:scope => "col"} MemberId
+        %th{:scope => "col"} Email
+    %tbody
+      - @members.each do |member|
+        %tr
+          %th{:scope => "row"}= member.id
+          %td= member.email
