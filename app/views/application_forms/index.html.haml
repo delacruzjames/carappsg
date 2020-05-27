@@ -1,0 +1,27 @@
+%h1 Listing application_forms
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Email
+      %th Company
+      %th Message
+      %th
+      %th
+      %th
+
+  %tbody
+    - @application_forms.each do |application_form|
+      %tr
+        %td= application_form.name
+        %td= application_form.email
+        %td= application_form.company
+        %td= application_form.message
+        %td= link_to 'Show', application_form
+        %td= link_to 'Edit', edit_application_form_path(application_form)
+        %td= link_to 'Destroy', application_form, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Application form', new_application_form_path
