@@ -29,4 +29,13 @@ RSpec.describe Member, type: :model do
     valid_email = FactoryBot.build :member, email: 'james@mail.com'
     expect(valid_email).to be_valid
   end
+
+  it "should validate if email is already exists" do
+    member = FactoryBot.create :member, email: 'delacruzjames@gmail.com'
+    new_member = FactoryBot.build :member, email: 'delacruzjames@gmail.com'
+
+    expect(member).to be_valid
+    expect(new_member).not_to be_valid
+    expect(new_member.errors.messages[:email]).to include("has already been taken")
+  end
 end

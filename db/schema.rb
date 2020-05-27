@@ -13,9 +13,10 @@
 ActiveRecord::Schema.define(version: 2020_05_27_133332) do
 
   create_table "members", force: :cascade do |t|
-    t.string "email"
+    t.string "email", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_members_on_email", unique: true
   end
 
 end
