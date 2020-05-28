@@ -11,11 +11,16 @@ RSpec.describe "/application_forms", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
-  describe "GET /index" do
+  describe "GET #index" do
     it "renders a successful response" do
-      ApplicationForm.create! valid_attributes
       get application_forms_url
       expect(response).to be_successful
+    end
+
+    it "assign @application_forms" do
+      application_form = FactoryBot.create :application_form
+      get application_forms_url
+      expect(assigns(:application_forms)).to eq([application_form])
     end
   end
 
