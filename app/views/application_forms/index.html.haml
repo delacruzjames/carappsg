@@ -1,15 +1,12 @@
 %h1 Application Forms
 
-%table
-  %thead
+%table.table
+  %thead.thead-dark
     %tr
       %th Name
       %th Email
       %th Company
       %th Message
-      %th
-      %th
-      %th
 
   %tbody
     - @application_forms.each do |application_form|
