@@ -1,16 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "/application_forms", type: :request do
-  # ApplicationForm. As you add validations to ApplicationForm, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
-
   describe "GET #index" do
     it "renders a successful response" do
       get application_forms_url
@@ -24,10 +14,15 @@ RSpec.describe "/application_forms", type: :request do
     end
   end
 
-  describe "GET /new" do
+  describe "GET #new" do
     it "renders a successful response" do
       get new_application_form_url
       expect(response).to be_successful
+    end
+
+    it "assign to @application_form" do
+      get new_application_form_url
+      expect(assigns(:application_form)).to be_a_new(Widget)
     end
   end
 
