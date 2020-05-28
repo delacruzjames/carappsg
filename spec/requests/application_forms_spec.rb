@@ -22,33 +22,41 @@ RSpec.describe "/application_forms", type: :request do
 
     it "assign to @application_form" do
       get new_application_form_url
-      expect(assigns(:application_form)).to be_a_new(Widget)
+      expect(assigns(:application_form)).to be_a_new(ApplicationForm)
     end
   end
 
   describe "POST /create" do
+    invalid_params = {name: nil, email: nil, company: nil, message: nil}
+    valid_params = {
+      name: "James Dela Cruz",
+      email: "james@gmail.com",
+      company: "James Company",
+      message: "Message details"
+    }
+
     context "with valid parameters" do
       it "creates a new ApplicationForm" do
         expect {
-          post application_forms_url, params: { application_form: valid_attributes }
+          post application_forms_url, params: { application_form: valid_params }
         }.to change(ApplicationForm, :count).by(1)
       end
 
       it "redirects to the created application_form" do
-        post application_forms_url, params: { application_form: valid_attributes }
-        expect(response).to redirect_to(application_form_url(ApplicationForm.last))
+        post application_forms_url, params: { application_form: valid_params }
+        expect(response).to redirect_to root_path
       end
     end
 
     context "with invalid parameters" do
       it "does not create a new ApplicationForm" do
         expect {
-          post application_forms_url, params: { application_form: invalid_attributes }
+          post application_forms_url, params: { application_form: invalid_params }
         }.to change(ApplicationForm, :count).by(0)
       end
 
       it "renders a successful response (i.e. to display the 'new' template)" do
-        post application_forms_url, params: { application_form: invalid_attributes }
+        post application_forms_url, params: { application_form: invalid_params }
         expect(response).to be_successful
       end
     end

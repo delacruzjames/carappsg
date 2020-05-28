@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2020_05_28_034828) do
     t.string "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "member_id", null: false
+    t.bigint "member_id"
     t.index ["email"], name: "index_application_forms_on_email", unique: true
     t.index ["member_id"], name: "index_application_forms_on_member_id"
   end
