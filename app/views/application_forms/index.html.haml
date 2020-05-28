@@ -1,4 +1,12 @@
 %h1 Application Forms
+= form_tag application_forms_url, method: :get do
+  = select_tag :member_email, options_from_collection_for_select(Member.all, "id", "email"), { include_blank: true }
+  = label_tag(:email, "Search Email")
+  = text_field_tag :email, params[:email]
+  = label_tag(:date, "Search Date")
+  = text_field_tag :date, params[:date]
+  = submit_tag("Search", name: nil, class: "btn btn-primary")
+
 
 %table.table
   %thead.thead-dark
@@ -6,7 +14,7 @@
       %th Name
       %th Email
       %th Company
-      %th Message
+      %th Date
 
   %tbody
     - @application_forms.each do |application_form|
@@ -14,6 +22,6 @@
         %td= application_form.name
         %td= application_form.email
         %td= application_form.company
-        %td= application_form.message
+        %td= application_form.created_at.strftime("%d/%m/%Y")
 
 %br

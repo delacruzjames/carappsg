@@ -1,7 +1,7 @@
 class ApplicationFormsController < ApplicationController
 
   def index
-    @application_forms = ApplicationForm.all
+    @application_forms = ApplicationForm.search(params)
   end
 
   def new

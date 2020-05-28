@@ -5,6 +5,5 @@ FactoryBot.define do
     company { Faker::Company.name }
     message { Faker::Lorem.sentences(number: 1, supplemental: true) }
     created_at { Faker::Date.in_date_period }
-    member
   end
 end
