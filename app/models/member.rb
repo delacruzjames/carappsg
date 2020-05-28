@@ -1,4 +1,4 @@
 class Member < ApplicationRecord
-  VALID_EMAIL_REGEX = /\A([\w+\-]\.?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
-  validates :email, presence: true, format: VALID_EMAIL_REGEX, uniqueness: true
+  include EmailValidation
+  has_many :application_forms
 end
