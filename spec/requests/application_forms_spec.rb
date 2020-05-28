@@ -46,6 +46,21 @@ RSpec.describe "/application_forms", type: :request do
         post application_forms_url, params: { application_form: valid_params }
         expect(response).to redirect_to root_path
       end
+
+      it "should associate to the members if email is exists" do
+        member = FactoryBot.create :member
+        valid_params.store(:email, member.email)
+        expect {
+          post application_forms_url, params: { application_form: valid_params }
+        }.to change(ApplicationForm, :count).by(1)
+      end
+
+      it "should link the member to application_form" do
+        member = FactoryBot.create :member
+        valid_params.store(:email, member.email)
+        post application_forms_url, params: { application_form: valid_params }
+        expect(ApplicationForm.last.member).to eq(member)
+      end
     end
 
     context "with invalid parameters" do
