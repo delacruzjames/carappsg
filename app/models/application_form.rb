@@ -6,16 +6,20 @@ class ApplicationForm < ApplicationRecord
   validates :message, presence: true
 
   belongs_to :member, optional: true
+  
+  scope :with_email, -> (email) { where("email LIKE ?", "%#{email}%") }
+  scope :submitted_by_member, -> (member) { where(member_id: member) }
+  scope :start_of_the_til, -> (date) { where(:created_at => Date.today.beginning_of_day..date.to_date) }
 
   before_save :verify_email
 
   def self.search(params)
     if params[:member_email].present?
-      where(member_id: params[:member_email])
+      submitted_by_member(params[:member_email])
     elsif params[:email].present?
-      where("email LIKE ?", "%#{params[:email]}%")
+      with_email(params[:email])
     elsif params[:date].present?
-      where(:created_at => Date.today.beginning_of_day..params[:date].to_date)
+      start_of_the_year_to(params[:date])
     else
       all
     end
