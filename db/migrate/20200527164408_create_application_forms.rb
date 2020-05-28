@@ -9,6 +9,6 @@ class CreateApplicationForms < ActiveRecord::Migration[6.0]
       t.timestamps
     end
 
-    add_index :application_forms, :email, unique: true
+    add_index :application_forms, :email
   end
 end
